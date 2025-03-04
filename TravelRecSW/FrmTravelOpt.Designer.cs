@@ -104,6 +104,7 @@
             this.tsbtDelete.Size = new System.Drawing.Size(126, 20);
             this.tsbtDelete.Text = "ลบ";
             this.tsbtDelete.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.tsbtDelete.Click += new System.EventHandler(this.tsbtDelete_Click);
             // 
             // toolStripLabel1
             // 
@@ -156,6 +157,7 @@
             this.pbTravellerImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbTravellerImage.TabIndex = 1;
             this.pbTravellerImage.TabStop = false;
+            this.pbTravellerImage.Click += new System.EventHandler(this.pbTravellerImage_Click);
             // 
             // lbTravellerFullname
             // 
@@ -167,6 +169,7 @@
             this.lbTravellerFullname.TabIndex = 30;
             this.lbTravellerFullname.Text = "Traveller Fullname";
             this.lbTravellerFullname.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbTravellerFullname.Click += new System.EventHandler(this.lbTravellerFullname_Click);
             // 
             // FrmTravelOpt
             // 

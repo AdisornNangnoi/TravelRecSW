@@ -72,6 +72,40 @@ namespace TravelRecSW
             }
         }
 
+        private void pbTravellerImage_Click(object sender, EventArgs e)
+        {
+            FrmProfile frmProfile = new FrmProfile(shareInfo.travellerId);
+
+            // Subscribe Event เพื่ออัปเดตข้อมูลแบบเรียลไทม์
+            frmProfile.ProfileUpdated += UpdateProfileInfo;
+
+            frmProfile.ShowDialog(this);
+        }
+
+        private void lbTravellerFullname_Click(object sender, EventArgs e)
+        {
+            FrmProfile frmProfile = new FrmProfile(shareInfo.travellerId);
+
+            // Subscribe Event เพื่ออัปเดตข้อมูลแบบเรียลไทม์
+            frmProfile.ProfileUpdated += UpdateProfileInfo;
+
+            frmProfile.ShowDialog(this);
+        }
+
+        // ฟังก์ชันสำหรับอัปเดตข้อมูลเมื่อ `ProfileUpdated` ถูกเรียก
+        private void UpdateProfileInfo()
+        {
+            lbTravellerFullname.Text = shareInfo.travellerFullname;
+
+            if (shareInfo.travellerImage != null)
+            {
+                using (MemoryStream ms = new MemoryStream(shareInfo.travellerImage))
+                {
+                    pbTravellerImage.Image = Image.FromStream(ms);
+                }
+            }
+        }
+
         private void FrmTravelOpt_Load(object sender, EventArgs e)
         {
             //โชว์รูป
@@ -118,5 +152,63 @@ namespace TravelRecSW
 
             
         }
+
+        private void tsbtDelete_Click(object sender, EventArgs e)
+        {
+            // ยืนยันก่อนลบ
+            DialogResult result = MessageBox.Show("คุณต้องการลบข้อมูลนี้ใช่หรือไม่?",
+                                                  "ยืนยันการลบ",
+                                                  MessageBoxButtons.YesNo,
+                                                  MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                int indexRow = dgvTravel.CurrentRow.Index;
+                int travelId = int.Parse(dgvTravel.Rows[indexRow].Cells[3].Value.ToString());
+                // ติดต่อฐานข้อมูล
+                SqlConnection conn = new SqlConnection(shareInfo.connStr);
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+                conn.Open();
+
+                // คำสั่ง SQL สำหรับลบข้อมูล
+                string strSql = "DELETE FROM travel_tb WHERE travelId = @travelId";
+
+                // ใช้ Transaction ป้องกันปัญหาข้อมูลเสียหาย
+                SqlTransaction sqlTransaction = conn.BeginTransaction();
+                SqlCommand sqlCommand = new SqlCommand(strSql, conn, sqlTransaction);
+
+                // กำหนดค่า parameter
+                sqlCommand.Parameters.AddWithValue("@travelId", travelId);
+
+                try
+                {
+                    int rowsAffected = sqlCommand.ExecuteNonQuery();
+                    sqlTransaction.Commit();
+                    conn.Close();
+
+                    if (rowsAffected > 0)
+                    {
+                        MessageBox.Show("ลบข้อมูลเรียบร้อยแล้ว", "ผลการทำงาน", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        FrmTravelOpt_Load(sender, e);
+
+                    }
+                    else
+                    {
+                        shareInfo.showWarningMSG("ไม่พบข้อมูลที่ต้องการลบ");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    sqlTransaction.Rollback();
+                    conn.Close();
+                    shareInfo.showWarningMSG("ไม่สามารถลบข้อมูลได้ ( " + ex.Message + " )");
+                }
+            }
+        }
+
+        
     }
 }

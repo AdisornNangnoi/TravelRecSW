@@ -108,6 +108,7 @@
             this.tsbtToFrmLogin.Size = new System.Drawing.Size(126, 20);
             this.tsbtToFrmLogin.Text = "การเดินทางของฉัน";
             this.tsbtToFrmLogin.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.tsbtToFrmLogin.Click += new System.EventHandler(this.tsbtToFrmLogin_Click);
             // 
             // panel1
             // 
@@ -137,6 +138,7 @@
             this.btSelectTravelImage.TabIndex = 52;
             this.btSelectTravelImage.Text = "เลือกรูปการเดินทาง";
             this.btSelectTravelImage.UseVisualStyleBackColor = true;
+            this.btSelectTravelImage.Click += new System.EventHandler(this.btSelectTravelImage_Click);
             // 
             // dtpTravelEndDate
             // 

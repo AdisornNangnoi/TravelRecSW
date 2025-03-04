@@ -58,9 +58,9 @@
             this.cbConfirm.AutoSize = true;
             this.cbConfirm.Location = new System.Drawing.Point(334, 323);
             this.cbConfirm.Name = "cbConfirm";
-            this.cbConfirm.Size = new System.Drawing.Size(124, 17);
+            this.cbConfirm.Size = new System.Drawing.Size(126, 17);
             this.cbConfirm.TabIndex = 28;
-            this.cbConfirm.Text = "ยืนยันการลงทะเบียน";
+            this.cbConfirm.Text = "ยืนยันการแก้ไขข้อมูล";
             this.cbConfirm.UseVisualStyleBackColor = true;
             // 
             // toolStripSeparator1
@@ -99,6 +99,7 @@
             this.tsbtSave.Size = new System.Drawing.Size(126, 20);
             this.tsbtSave.Text = "บันทึก";
             this.tsbtSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.tsbtSave.Click += new System.EventHandler(this.tsbtSave_Click);
             // 
             // tsbtCancel
             // 
@@ -108,6 +109,7 @@
             this.tsbtCancel.Size = new System.Drawing.Size(126, 20);
             this.tsbtCancel.Text = "ยกเลิก";
             this.tsbtCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.tsbtCancel.Click += new System.EventHandler(this.tsbtCancel_Click);
             // 
             // tsbtToFrmLogin
             // 
@@ -117,6 +119,7 @@
             this.tsbtToFrmLogin.Size = new System.Drawing.Size(126, 20);
             this.tsbtToFrmLogin.Text = "การเดินทางของฉัน";
             this.tsbtToFrmLogin.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.tsbtToFrmLogin.Click += new System.EventHandler(this.tsbtToFrmLogin_Click);
             // 
             // tbTravellerPasswordConfirm
             // 
@@ -125,6 +128,7 @@
             this.tbTravellerPasswordConfirm.PasswordChar = '*';
             this.tbTravellerPasswordConfirm.Size = new System.Drawing.Size(188, 20);
             this.tbTravellerPasswordConfirm.TabIndex = 26;
+            this.tbTravellerPasswordConfirm.Enter += new System.EventHandler(this.tbTravellerPasswordConfirm_Enter);
             // 
             // tbTravellerPassword
             // 
@@ -133,6 +137,7 @@
             this.tbTravellerPassword.PasswordChar = '*';
             this.tbTravellerPassword.Size = new System.Drawing.Size(188, 20);
             this.tbTravellerPassword.TabIndex = 25;
+            this.tbTravellerPassword.Enter += new System.EventHandler(this.tbTravellerPassword_Enter);
             // 
             // label4
             // 
@@ -212,6 +217,7 @@
             this.btSelectTravellerImage.TabIndex = 17;
             this.btSelectTravellerImage.Text = "Select your image";
             this.btSelectTravellerImage.UseVisualStyleBackColor = true;
+            this.btSelectTravellerImage.Click += new System.EventHandler(this.btSelectTravellerImage_Click);
             // 
             // label1
             // 
@@ -246,7 +252,9 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "FrmProfile";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ข้อมูลส่วนตัว - Travel Rec SW V.1.0";
+            this.Load += new System.EventHandler(this.FrmProfile_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
